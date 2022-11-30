@@ -2,11 +2,27 @@
 
 #include "./Funcoes.h"
 
+double funcao(double x){
+    return (x*x*x);
+}
+
 int main(){
 
-    double x=20, y=30;
+    double a, b, erro, *perro, raiz;
+    int *itr, i;
 
-    printf("Soma: %.4lf\n\n", soma(x,y));
+    a =-1;
+    b = 2;
+
+    erro = 1e-4;
+    i = 100;
+
+    perro = &erro;
+    itr = &i;
+
+    raiz = bissecao(funcao, a, b, perro, itr);    
+
+    printf("\n\nRaiz= %.10lf\n\n", raiz);
 
     return 0;
 }
