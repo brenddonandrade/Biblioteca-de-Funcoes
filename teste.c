@@ -7,22 +7,24 @@ double funcao(double x){
 }
 
 int main(){
+    
+    // Buttom intervall (a) and top intervall (b)
+    double a =-2, b=3;
+    double x0;
 
-    double a, b, erro, *perro, raiz;
-    int *itr, i;
+    // Iteractions 
+    int i = 100;
 
-    a =-1;
-    b = 2;
+    // Error
+    double err = 0.001;
 
-    erro = 1e-4;
-    i = 100;
+    x0 = bissecao(funcao, a, b, &err, &i);
 
-    perro = &erro;
-    itr = &i;
+    printf("\n\nRaiz: %.10lf\n\n", x0);
 
-    raiz = bissecao(funcao, a, b, perro, itr);    
+    
+    // Number of iteractions
+    int itr;
 
-    printf("\n\nRaiz= %.10lf\n\n", raiz);
-
-    return 0;
+    
 }

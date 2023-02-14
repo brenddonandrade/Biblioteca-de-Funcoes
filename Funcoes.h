@@ -4,21 +4,24 @@
 #include <stdio.h>
 #include <math.h>
 
-//  px e py sao os ponteiros que vao armazenar os pontos;
-void metodo_de_euler_explicito(double x1, double y1, double *px, double *py) {
-  double x2, y2;
 
-  x2 = x1 + H;
-  *px = x2;
+// Tamanhos dos tipos da maquina
+void size_types(){
+  printf("\n=============== Types ================\n");
+  printf("char          %2d bytes \n", sizeof(char));
+  printf("int           %2d bytes \n", sizeof(int));
+  printf("unsigned int  %2d bytes \n", sizeof(unsigned int));
+  printf("long int      %2d bytes \n", sizeof(long int));
+  printf("float         %2d bytes \n", sizeof(float));
+  printf("double        %2d bytes \n", sizeof(double));
+  printf("long double   %2d bytes \n", sizeof(long double));
+  printf("======================================\n\n");
 
-  y2 = y1 + derivada(x1, y1);
-  *py = y2;
-
-  return;
 }
 
+
 double bissecao(double f(), double a, double b, double *err, int *itr) {
-  double m, fm, tolerance, m_a;
+  double m, fm, tolerance;
   int n, nmax;
 
   nmax = *itr;
@@ -29,31 +32,25 @@ double bissecao(double f(), double a, double b, double *err, int *itr) {
   printf("\n\nBissecao:\n");
 
   do {
-    if (n > 0)
-      m_a = m;
+    
     m = (a + b) / 2;
     fm = f(m);
-
-    if (fm == 0)
-      break;
-
-    if (f(a) * fm < 0)
+    if(fm == 0) break;
+    if(f(a) *f(m) < 0)
       b = m;
-    else if( f(b) * fm < 0){
+    else
       a = m;
-    } else {
-        printf("\nA raiz não pertence a esse intervalo.\n\n");
-        m = NAN;
-        break;
-    }
 
     n++;
-    *err = fabs(m - m_a) / fabs(m); // usa como estimativa o erro relativo
-    printf("%2d\ta=%.10lf \tb=%.10lf\tm=%.10lfm\tf(m)= %.8lf\terr= %.2e\n", n, a, b, m, fm, *err);
+    *err = b-a;
+    
+    printf("%2d\ta=%10lf \tb=%.10lf\tm=%.10lf\tf(m)= %.8lf\terr= %.2e\n", n, a, b, m, fm, *err);
   } while ((n < nmax) && (tolerance < *err));
   *itr = n;
   return m;
 }
+
+
 
 
 #endif
