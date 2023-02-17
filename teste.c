@@ -1,15 +1,16 @@
 #include <stdio.h>
+#include <math.h>
 
 #include "./Funcoes.h"
 
 double funcao(double x){
-    return (x*x*x);
+    return (sin(x));
 }
 
 int main(){
     
     // Buttom intervall (a) and top intervall (b)
-    double a =-2, b=3;
+    double a =-1, b=2;
     double x0;
 
     // Iteractions 
@@ -18,7 +19,9 @@ int main(){
     // Error
     double err = 0.001;
 
-    x0 = bissecao(funcao, a, b, &err, &i);
+    // x0 = bissecao(funcao, a, b, &err, &i);
+
+    x0 = regula_falsi(funcao, a, b, &err, &i);
 
     printf("\n\nRaiz: %.10lf\n\n", x0);
 
