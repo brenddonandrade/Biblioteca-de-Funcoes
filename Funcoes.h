@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 
 // Tamanhos dos tipos da maquina
@@ -86,6 +87,26 @@ double regula_falsi(double f(), double a, double b, double *err , int *itr) {
   } while ((n < nmax) && (tolerance < *err) && (fabs(fm) > 1e-4));
 
   return m;
+}
+
+double ponto_fixo(double f(), double x0, double *err, int *itr){
+  double x1, tolerance;
+  int nmax= *itr , n=0;
+
+  tolerance = *err;
+
+  do {
+    x1 = f(x0);
+    *err = fabs(x1-x0);
+    n++;
+    
+    printf("%2d    x0=%.10lf    x1=%.10lf    err=%.2e\n", n, x0, x1, *err);
+    x0 = x1;
+  }while((n < nmax) && (*err > tolerance));
+
+  
+  *itr = n;
+  return x1;
 }
 
 #endif

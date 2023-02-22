@@ -1,33 +1,28 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "./Funcoes.h"
 
-double funcao(double x){
-    return (sin(x));
-}
 
-int main(){
+int main(int argc, char **argv){
     
     // Buttom intervall (a) and top intervall (b)
-    double a =-1, b=2;
-    double x0;
+    int i, itr;
+    double a, b, err, x0;
+    
+    a = atof(argv[1]);
+    b = atof(argv[2]);
 
-    // Iteractions 
-    int i = 100;
+
+    // Iteractions  
+    i = atoi(argv[3]);
+    itr = i;
 
     // Error
-    double err = 0.001;
-
-    // x0 = bissecao(funcao, a, b, &err, &i);
-
-    x0 = regula_falsi(funcao, a, b, &err, &i);
-
-    printf("\n\nRaiz: %.10lf\n\n", x0);
+    err = atof(argv[4]);
 
     
-    // Number of iteractions
-    int itr;
-
     
+    return 0;
 }
