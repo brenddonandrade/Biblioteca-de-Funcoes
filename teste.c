@@ -4,6 +4,15 @@
 
 #include "./Funcoes.h"
 
+# define M_PI 3.14159265358979323846
+
+double funcao(double x){
+    return ((x*exp((-x)/3.0)) - 1);
+}
+
+double derivada(double x){
+    return (exp(-(x/3.0))*(1 - ((pow(x, 2))/3.0)));
+}
 
 int main(int argc, char **argv){
     
@@ -23,6 +32,14 @@ int main(int argc, char **argv){
     err = atof(argv[4]);
 
     
+
+    
+    // x0 = ponto_fixo(funcao, a, &err, &itr);
+
+
+    x0 = newton(funcao, derivada, a , &err, &itr);
+
+    printf("\n\nx0=%.10lf\n\n", x0);
     
     return 0;
 }

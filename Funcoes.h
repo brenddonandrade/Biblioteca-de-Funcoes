@@ -90,23 +90,49 @@ double regula_falsi(double f(), double a, double b, double *err , int *itr) {
 }
 
 double ponto_fixo(double f(), double x0, double *err, int *itr){
-  double x1, tolerance;
+  double x, tolerance, fm;
   int nmax= *itr , n=0;
 
   tolerance = *err;
 
   do {
-    x1 = f(x0);
-    *err = fabs(x1-x0);
+    fm = f(x0);
+    x = fm;
+    *err = fabs(x-x0);
     n++;
     
-    printf("%2d    x0=%.10lf    x1=%.10lf    err=%.2e\n", n, x0, x1, *err);
-    x0 = x1;
+    printf("%2d    x0=%.10lf    x1=%.10lf    f(x0)=%.10lf    err=%.2e\n", n, x0, x, fm, *err);
+    x0 = x;
   }while((n < nmax) && (*err > tolerance));
 
   
   *itr = n;
-  return x1;
+  return x;
 }
+
+
+double newton(double f(), double fl(), double x0, double *err,  int *itr){
+  double fm, x, tolerance;
+  int nmax, n=0;
+  
+  nmax = *itr;
+  tolerance = *err;
+
+  do {
+    fm = f(x0);
+    x = x0 - (fm/fl(x0));
+    x0 = x;
+
+    n++;
+
+    *err = fabs(fm);
+    printf("%2d    x0=%.10lf    x1=%.10lf    f(x0)=%.10lf     err=%.2e\n", n, x0, x, fm, *err);
+  }while(( n < nmax) && (*err > tolerance));
+
+
+  return x;
+}
+
+
 
 #endif
